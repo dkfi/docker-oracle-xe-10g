@@ -35,7 +35,7 @@ RUN echo 'export ORACLE_SID=XE' >> /etc/bash.bashrc
 RUN rm /oracle-xe_10.2.0.1-1.1_i386.deb*
 RUN apt-get clean
 
-EXPOSE 1521
+EXPOSE 1521 22
 
 CMD sed -i -E "s/HOST = [^)]+/HOST = $HOSTNAME/g" /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/network/admin/listener.ora; \
 	service oracle-xe start; \
