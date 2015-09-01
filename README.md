@@ -14,7 +14,7 @@ docker pull dkfi/oracle-xe-10g
 
 Run with 22 and 1521 ports opened:
 ```
-docker run -d -p 49160:22 -p 49161:1521 dkfi/oracle-xe-10g
+docker run -d -p 49160:22 -p 49161:1521 dkfi/docker-oracle-xe-10g
 ```
 
 Connect database with following setting:
