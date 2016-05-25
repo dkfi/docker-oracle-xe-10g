@@ -26,10 +26,10 @@ RUN dpkg -i /oracle-xe_10.2.0.1-1.1_i386.deb
 
 RUN printf 8080\\n1521\\noracle\\noracle\\ny\\n | /etc/init.d/oracle-xe configure
 
-RUN echo 'export ORACLE_HOME=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server' >> /etc/bash.bashrc
-RUN echo 'export LD_LIBRARY_PATH=$ORACLE_HOME/lib' >> /etc/bash.bashrc
-RUN echo 'export PATH=$ORACLE_HOME/bin:$PATH' >> /etc/bash.bashrc
-RUN echo 'export ORACLE_SID=XE' >> /etc/bash.bashrc
+ENV ORACLE_HOME=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server
+ENV LD_LIBRARY_PATH=$ORACLE_HOME/lib
+ENV PATH=$ORACLE_HOME/bin:$PATH
+ENV ORACLE_SID=XE
 
 # Remove installation files
 RUN rm /oracle-xe_10.2.0.1-1.1_i386.deb*
