@@ -33,8 +33,12 @@ RUN dpkg --add-architecture i386 && \
     echo 'export PATH=$ORACLE_HOME/bin:$PATH' >> /etc/bash.bashrc && \
     echo 'export ORACLE_SID=XE' >> /etc/bash.bashrc
 
-EXPOSE 1521 22
+EXPOSE 1521 22 8080
 
 CMD sed -i -E "s/HOST = [^)]+/HOST = $HOSTNAME/g" /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/network/admin/listener.ora; \
+    sed -i -E "s/HOST = [^)]+/HOST = $HOSTNAME/g" /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/network/admin/tnsnames.ora; \
     service oracle-xe start; \
+    su -c "$ORACLE_HOME/bin/lsnrctl start" oracle; \
+    echo "alter system disable restricted session;" | sqlplus -s SYSTEM/oracle; \
+    echo "EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);" | sqlplus -s SYSTEM/oracle; \
     /usr/sbin/sshd -D
