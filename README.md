@@ -28,7 +28,7 @@ password: oracle
 
 For example, connect to database with sqlplus:
 ```
-sqlplus system/oracle@localhost:49161/xe
+sqlplus system/oracle@//localhost:49161/xe
 ```
 
 Password for SYS & SYSTEM
